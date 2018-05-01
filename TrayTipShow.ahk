@@ -27,8 +27,8 @@ Class TrayTipShow
 	}
 	
 	
-	
-	; Copy this function into your script to use it.
+	/**
+	 */
 	_hideTrayTip($timeout)
 	{
 		if( ! $timeout ) 
