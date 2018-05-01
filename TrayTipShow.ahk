@@ -11,44 +11,57 @@ Class TrayTipShow
 	 */
 	__New()
 	{
-		;MsgBox,262144,, TrayTipShow.NEW(),2 
 	}
 	
 	/**
 	 */
 	show($title, $message, $options, $timeout)
 	{
-		;MsgBox,262144,timeout, %$timeout%,3 
-		TrayTip, %$title%, %$message%,, %$options%
+		this._iconShow()
 
+		TrayTip, %$title%, %$message%,, %$options%
+		
 		this._hideTrayTip($timeout)
 		
-		return this 
 	}
-	
 	
 	/**
 	 */
 	_hideTrayTip($timeout)
 	{
-		if( ! $timeout ) 
-			return
+		
+		;if( ! $timeout ) 
+			;return
 		
 		$timeout_ms	:= $timeout < 500 ? $timeout * 1000 : $timeout
 		
 		sleep, %$timeout_ms%
 
 		TrayTip  ; Attempt to hide it the normal way.
-		if SubStr(A_OSVersion,1,3) = "10."
-		{
-			Menu Tray, NoIcon
-			Sleep 200  ; It may be necessary to adjust this sleep.
-			Menu Tray, Icon
-		}
+		this._iconHide()
+
+		;Menu Tray, NoIcon
+		;if SubStr(A_OSVersion,1,3) = "10."
+		;{
+		;	Menu Tray, NoIcon
+		;	Sleep 200  ; It may be necessary to adjust this sleep.
+		;	Menu Tray, Icon
+		;}
 	}
-	
-	
-	
+	/**
+	 */
+	_iconShow()
+	{
+		Menu Tray, Icon
+
+		Menu Tray, Icon, %systemroot%\system32\shell32.dll, 222
+	} 
+	/**
+	 */
+	_iconHide()
+	{
+		Menu Tray, NoIcon
+	} 
 }
 
 /*---------------------------------------

@@ -24,15 +24,35 @@ Class TrayTip
 	 */
 	show( $params* )
 	{
-		;Dump($params, "show", 1)		
-		;$params := this._getParams( $params )
-		
-		;Dump($params, "params", 1)
 		this._TrayTipShow.show( this._getParams( $params )* )
-		;this._TrayTipShow.show($title, $message, this._getOptions(), this._timeout)		
-
+		
 		return this
 	}
+	/** Set icon info
+	  * @return	self
+	 */
+	info( $params* )
+	{
+		this.icon("info")
+		return % this.show( $params* )
+	}
+	/** Set icon warning
+	  * @return	self
+	 */
+	warning( $params* )
+	{
+		this.icon("warning")
+		return % this.show( $params* )
+	}
+	/** Set icon error
+	  * @return	self
+	 */
+	error( $params* )
+	{
+		this.icon("error")
+		return % this.show( $params* )
+	}
+
 	
 	/*---------------------------------------
 		ANALYZE & GET PARAMETERS
@@ -88,7 +108,6 @@ Class TrayTip
 		return % [$variable].GetCapacity(1)>0
 	} 
 	
-	
 	/*---------------------------------------
 		PROPERTIES
 	-----------------------------------------
@@ -126,10 +145,6 @@ Class TrayTip
 		
 		return this
 	}
-	/*---------------------------------------
-		ICONS
-	-----------------------------------------
-	*/
 	/** Set\Get icon
 	 *
 	 * @param	string	icon
@@ -142,27 +157,7 @@ Class TrayTip
 		
 		return $icon ? this : this._icon
 	} 
-	/** Set icon info
-	  * @return	self
-	 */
-	info()
-	{
-		return % this.icon("info")
-	}
-	/** Set icon warning
-	  * @return	self
-	 */
-	warning()
-	{
-		return % this.icon("warning")
-	}
-	/** Set icon error
-	  * @return	self
-	 */
-	error()
-	{
-		return % this.icon("error")
-	}
+
 	/*---------------------------------------
 		PRIVATE
 	-----------------------------------------
